@@ -28,7 +28,7 @@ class CheckConnection extends StatelessWidget {
             ),
             Text(
               'Sorry,Unable to conect to the internet',
-              style: kErrorMsgStyle,
+              style: kTextStyle,
             ),
             ElevatedButton(
               onPressed: () {},

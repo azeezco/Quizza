@@ -7,7 +7,7 @@ const TextStyle kQuizzaStyle = TextStyle(
   fontWeight: FontWeight.bold,
   color: Color(0xFFF15A2A),
 );
-const TextStyle kErrorMsgStyle = TextStyle(
+const TextStyle kTextStyle = TextStyle(
   fontFamily: 'Lato',
   fontSize: 20.0,
   // fontWeight: FontWeight.bold,
