@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:quizza/screens/check_connection.dart';
+import 'package:quizza/screens/question_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: CheckConnection(),
+      home: QuestionPage(),
     );
   }
 }

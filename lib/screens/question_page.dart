@@ -17,25 +17,18 @@ class QuestionPage extends StatelessWidget {
                 'Quizza',
                 style: kQuizzaStyle,
               ),
-              Text('What is the name of NASA most famous sapce telescope?',
-                  style: kTextStyle),
+              SizedBox(
+                height: 50,
+              ),
+              Text(
+                'What is the name of NASA most famous sapce telescope?',
+                textAlign: TextAlign.center,
+                style: kQuestionStyle,
+              ),
+              SizedBox(
+                height: 130,
+              ),
               Options(),
-              TextButton(
-                onPressed: () {},
-                child: Text(''),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text(''),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text(''),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text(''),
-              ),
             ],
           ),
         ));
@@ -57,14 +50,82 @@ class Options extends StatefulWidget {
 }
 
 class _OptionsState extends State<Options> {
-  final String? _quetion = options[1];
+  bool _isSelected = false;
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         ListTile(
-          title: Text(options[0]),
-        )
+          shape: koptionBorderShape,
+          tileColor: kOptionsBackgroundColor,
+          selectedTileColor: kQuizzaColor,
+          selected: _isSelected,
+          onTap: () {
+            setState(() {
+              _isSelected = true;
+            });
+          },
+          title: Text(
+            'Big Eye',
+            style: kTextStyle,
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        ListTile(
+          shape: koptionBorderShape,
+          selectedTileColor: kQuizzaColor,
+          tileColor: kOptionsBackgroundColor,
+          selected: _isSelected,
+          onTap: () {
+            setState(() {
+              _isSelected = true;
+            });
+          },
+          title: Text(
+            'Hubble Space Telescope',
+            style: kTextStyle,
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        ListTile(
+          shape: koptionBorderShape,
+          tileColor: kOptionsBackgroundColor,
+          selectedTileColor: kQuizzaColor,
+          selected: _isSelected,
+          onTap: () {
+            setState(() {
+              _isSelected = true;
+            });
+          },
+          title: Text(
+            'Death Star',
+            style: kTextStyle,
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        ListTile(
+          shape: koptionBorderShape,
+          tileColor: kOptionsBackgroundColor,
+          selectedTileColor: kQuizzaColor,
+          selected: _isSelected,
+          onTap: () {
+            setState(() {
+              _isSelected = true;
+            });
+          },
+          title: Text(
+            'Millennium Falcon',
+            style: kTextStyle,
+          ),
+        ),
       ],
     );
   }
