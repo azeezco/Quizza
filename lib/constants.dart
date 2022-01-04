@@ -18,13 +18,11 @@ const TextStyle kQuizzaStyle = TextStyle(
 const TextStyle kTextStyle = TextStyle(
   fontFamily: 'Lato',
   fontSize: 20.0,
-  // fontWeight: FontWeight.bold,
   color: Colors.white,
 );
 const TextStyle kQuestionStyle = TextStyle(
   fontFamily: 'Lato',
   fontSize: 25.0,
-  // fontWeight: FontWeight.bold,
   color: Colors.white,
 );
 const TextStyle kButtonStyle = TextStyle(
