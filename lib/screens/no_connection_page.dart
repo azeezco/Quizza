@@ -3,8 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:quizza/constants.dart';
 
-class CheckConnection extends StatelessWidget {
-  const CheckConnection({Key? key}) : super(key: key);
+import 'package:quizza/internet_checker.dart';
+
+InternetChecker _internetChecker = InternetChecker();
+
+class NoConnectionPage extends StatelessWidget {
+  const NoConnectionPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
