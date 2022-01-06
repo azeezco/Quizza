@@ -1,11 +1,10 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
 import 'package:quizza/constants.dart';
+import 'package:quizza/components/options_list_tile.dart';
 
 class QuestionPage extends StatelessWidget {
-  const QuestionPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,127 +28,10 @@ class QuestionPage extends StatelessWidget {
               SizedBox(
                 height: 130,
               ),
-              Options(),
+              OptionsListTile(),
             ],
           ),
         ));
-  }
-}
-
-List<String> optionsValue = [
-  'Big Eye',
-  'Hubble Space Telescope',
-  'Death Star',
-  'Millennium Falcon'
-];
-
-enum options { option1, option2, option3, option4 }
-
-class Options extends StatefulWidget {
-  const Options({Key? key}) : super(key: key);
-
-  @override
-  _OptionsState createState() => _OptionsState();
-}
-
-class _OptionsState extends State<Options> {
-  options? _optionSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ListTile(
-            shape: koptionBorderShape,
-            tileColor: kOptionsBackgroundColor,
-            selectedTileColor: kQuizzaColor,
-            selected: _optionSelected == options.option1 ? true : false,
-            title: Text(
-              optionsValue[0],
-              style: kTextStyle,
-            ),
-            leading: Radio<options>(
-              value: options.option1,
-              groupValue: _optionSelected,
-              onChanged: (
-                options? value,
-              ) {
-                setState(() {
-                  _optionSelected = value;
-                });
-              },
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          ListTile(
-              shape: koptionBorderShape,
-              selectedTileColor: kQuizzaColor,
-              tileColor: kOptionsBackgroundColor,
-              selected: _optionSelected == options.option2 ? true : false,
-              title: Text(
-                optionsValue[1],
-                style: kTextStyle,
-              ),
-              leading: Radio<options>(
-                value: options.option2,
-                groupValue: _optionSelected,
-                onChanged: (options? value) {
-                  setState(() {
-                    _optionSelected = value;
-                  });
-                },
-              )),
-          SizedBox(
-            height: 10,
-          ),
-          ListTile(
-              shape: koptionBorderShape,
-              tileColor: kOptionsBackgroundColor,
-              selectedTileColor: kQuizzaColor,
-              selected: _optionSelected == options.option3 ? true : false,
-              title: Text(
-                optionsValue[2],
-                style: kTextStyle,
-              ),
-              leading: Radio<options>(
-                value: options.option3,
-                groupValue: _optionSelected,
-                onChanged: (options? value) {
-                  setState(() {
-                    _optionSelected = value;
-                  });
-                },
-              )),
-          SizedBox(
-            height: 10,
-          ),
-          ListTile(
-              shape: koptionBorderShape,
-              tileColor: kOptionsBackgroundColor,
-              selectedTileColor: kQuizzaColor,
-              selected: _optionSelected == options.option4 ? true : false,
-              title: Text(
-                optionsValue[3],
-                style: kTextStyle,
-              ),
-              leading: Radio<options>(
-                value: options.option4,
-                groupValue: _optionSelected,
-                onChanged: (options? value) {
-                  setState(() {
-                    _optionSelected = value;
-                  });
-                },
-              )),
-        ],
-      ),
-    );
   }
 }
 

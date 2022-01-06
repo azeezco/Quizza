@@ -3,10 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizza/constants.dart';
 
-import 'package:quizza/internet_checker.dart';
-
-InternetChecker _internetChecker = InternetChecker();
-
 class NoConnectionPage extends StatelessWidget {
   const NoConnectionPage({Key? key}) : super(key: key);
 

@@ -10,7 +10,7 @@ void main() {
 }
 
 InternetChecker _internetChecker = InternetChecker();
-String value = _internetChecker.check().toString();
+bool value = _internetChecker.isConnected;
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: value == 'true' ? QuestionPage() : NoConnectionPage(),
+      home: value ? QuestionPage() : NoConnectionPage(),
     );
   }
 }
