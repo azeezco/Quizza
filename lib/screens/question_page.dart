@@ -4,7 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:quizza/constants.dart';
 import 'package:quizza/components/options_list_tile.dart';
 
-class QuestionPage extends StatelessWidget {
+class QuestionPage extends StatefulWidget {
+  @override
+  State<QuestionPage> createState() => _QuestionPageState();
+}
+
+class _QuestionPageState extends State<QuestionPage> {
+  int value = 0;
+  Widget CustomRadioButton(String text, int index) {
+    return TextButton(
+      onPressed: () {
+        setState(() {
+          value = index;
+          print("You clicked $text at index $index, with value $value");
+        });
+      },
+      style: ButtonStyle(
+        backgroundColor:
+            MaterialStateColor.resolveWith((states) => Colors.white),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: (value == index) ? Colors.green : Colors.black,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +55,14 @@ class QuestionPage extends StatelessWidget {
               SizedBox(
                 height: 130,
               ),
-              OptionsListTile(),
+              Column(
+                children: [
+                  CustomRadioButton("Single", 1),
+                  CustomRadioButton("Married", 2),
+                  CustomRadioButton("Others", 3),
+                ],
+              ),
+              // OptionsListTile(),
             ],
           ),
         ));

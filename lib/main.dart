@@ -9,17 +9,18 @@ void main() {
   runApp(const MyApp());
 }
 
-InternetChecker _internetChecker = InternetChecker();
-bool value = _internetChecker.isConnected;
+//InternetChecker _internetChecker = InternetChecker();
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+//_internetChecker.main();
+//bool value = _internetChecker.isConnected;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: value ? QuestionPage() : NoConnectionPage(),
+      home: QuestionPage(),
     );
   }
 }
