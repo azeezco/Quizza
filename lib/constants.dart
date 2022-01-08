@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 const Color kBackgroundColor = Color(0xFF13244F);
 const Color kOptionsBackgroundColor = Color(0xFF000100);
 const Color kQuizzaColor = Color(0xFFF15A2A);
-const ShapeBorder koptionBorderShape = RoundedRectangleBorder(
+const OutlinedBorder koptionBorderShape = RoundedRectangleBorder(
   side: BorderSide(color: Color(0xFF555555), width: 2.0),
   borderRadius: BorderRadius.all(
     Radius.circular(3),
   ),
 );
+
 const TextStyle kQuizzaStyle = TextStyle(
   fontFamily: 'Baking',
   fontSize: 80.0,
