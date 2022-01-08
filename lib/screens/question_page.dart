@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:quizza/constants.dart';
@@ -10,23 +10,36 @@ class QuestionPage extends StatefulWidget {
 }
 
 class _QuestionPageState extends State<QuestionPage> {
+  List<String> optionsValue = [
+    'Big Eye',
+    'Hubble Space Telescope',
+    'Death Star',
+    'Millennium Falcon'
+  ];
+
   int value = 0;
   Widget CustomRadioButton(String text, int index) {
-    return TextButton(
-      onPressed: () {
+    return InkWell(
+      onTap: () {
         setState(() {
           value = index;
-          print("You clicked $text at index $index, with value $value");
         });
       },
-      style: ButtonStyle(
-        backgroundColor:
-            MaterialStateColor.resolveWith((states) => Colors.white),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: (value == index) ? Colors.green : Colors.black,
+      child: SizedBox(
+        height: 50,
+        child: Container(
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+            color: (value == index) ? kQuizzaColor : kOptionsBackgroundColor,
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+          ),
+          child: Text(
+            text,
+            textAlign: TextAlign.left,
+            style: kTextStyle,
+          ),
         ),
       ),
     );
@@ -55,59 +68,32 @@ class _QuestionPageState extends State<QuestionPage> {
               SizedBox(
                 height: 130,
               ),
-              Column(
-                children: [
-                  CustomRadioButton("Single", 1),
-                  CustomRadioButton("Married", 2),
-                  CustomRadioButton("Others", 3),
-                ],
+              Container(
+                padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    CustomRadioButton(optionsValue[0], 1),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CustomRadioButton(optionsValue[1], 2),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CustomRadioButton(optionsValue[2], 3),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CustomRadioButton(optionsValue[3], 4),
+                  ],
+                ),
               ),
+
               // OptionsListTile(),
             ],
           ),
         ));
-  }
-}
-
-class LabeledRadio extends StatelessWidget {
-  const LabeledRadio({
-    Key? key,
-    required this.label,
-    required this.padding,
-    required this.groupValue,
-    required this.value,
-    required this.onChanged,
-  }) : super(key: key);
-
-  final String label;
-  final EdgeInsets padding;
-  final bool groupValue;
-  final bool value;
-  final ValueChanged<bool> onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        if (value != groupValue) {
-          onChanged(value);
-        }
-      },
-      child: Padding(
-        padding: padding,
-        child: Row(
-          children: <Widget>[
-            Radio<bool>(
-              groupValue: groupValue,
-              value: value,
-              onChanged: (bool? newValue) {
-                onChanged(newValue!);
-              },
-            ),
-            Text(label),
-          ],
-        ),
-      ),
-    );
   }
 }
