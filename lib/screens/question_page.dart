@@ -3,8 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:quizza/constants.dart';
 import 'package:quizza/components/options_list_tile.dart';
+import 'package:quizza/services/response.dart';
+
+ResponseClass _responseClass = ResponseClass();
 
 class QuestionPage extends StatefulWidget {
+  @override
+  init(state) {
+    _responseClass.getQuiz();
+  }
+
   @override
   State<QuestionPage> createState() => _QuestionPageState();
 }
@@ -23,6 +31,9 @@ class _QuestionPageState extends State<QuestionPage> {
       onTap: () {
         setState(() {
           value = index;
+          print(_responseClass.question);
+          print(_responseClass.incorrect_answers);
+          print(_responseClass.question);
         });
       },
       child: SizedBox(
