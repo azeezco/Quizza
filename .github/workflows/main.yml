@@ -1,29 +1,30 @@
 name: 'Quizza CI'
-on: 
+on:
   push:
     branches: [master]
-  
+  pull_request:
+    types: [labeled, opened, synchronize, reopened]
 
-jobs: 
-  tests: 
+jobs:
+  tests:
     name: Test and analyze flutter code
     runs-on: ubuntu-latest
-    steps: 
-      - name: Checkout quizza_ci
+    steps:
+      - name: Checkout quizza
         uses: actions/checkout@v2
-        with: 
+        with:
           path: my_directory
-      - uses: subosito/flutter-action!v1
-        with: 
+      - uses: subosito/flutter-action@v1
+        with:
           flutter-version: '2.5.0'
           channel: 'stable'
 
       - name: Run format, analyze, test
         working-directory: ./my_directory
         run: |
-         flutter format --set-exit-if-changed .
-flutter analyze --fatal-warnings
-flutter test --coverages
+          flutter format --set-exit-if-changed .
+          flutter analyze --fatal-warnings
+          flutter test --coverage
   build:
     name: Build app
     needs: [tests]
@@ -31,52 +32,45 @@ flutter test --coverages
     strategy:
       matrix:
         os: [ubuntu-latest, macos-11]
-      steps: 
-        - name:
-        Checkout flutter_quizza_ci
-          uses: actions/checkout@v2
+    steps:
+      - name: Checkout quizza
+        uses: actions/checkout@v2
 
-        - name: Configure Flutter environment
-          uses: subosito/Flutter-action@v1
-          with:
-            flutter-version: '2.5.0'
-            channel: 'stable'
+      - name: Configure Flutter environment 
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '2.5.0'
+          channel: 'stable'
 
-        - name: Cache
-          uses: actions/cache@v2
-          with:
-            path: |
-              build/
-              andriod/.gradle/
-            key: $
-{{ runner.os }}-flutter_quizza_ci_example-${{ hashFiles('**/*.gradle*', 'pubspec.look')}}
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            build/
+            android/.gradle/
+          key: ${{ runner.os }}-quizza-${{ hashFiles('**/*.gradle*', 'pubspec.lock') }}
 
-        - name: Build Andriod app
-          if: $
-{{ matrix.os == 'ubuntu-latest' }}
-          run: |
-          echo "Building Andriod..."
+      - name: Build Android app
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: |
+          echo "Building Android..."
           pwd
           flutter pub get
           flutter build apk --no-pub
-          flutter build appbundle --no-pub
-
-        - name: Build iOS app
-          if: $
-{{ matrix.os == 'macos-11' }}
-          run: |
-            flutter pub get
-            echo "Build iOS..."
-            echo "Not implemented yet..."
-
-        - name: 'Upload Builds'
-          uses: actions/upload-artifact@v2
-          if: $
-{{ matrix.os == 'ubuntu-latest' }}
-          with:
-            name: builds
-            path: |
-              build/app/outputs/quizza-apk/app-release.apk
-              build/app/outputs/bundle/release/app-release.aab 
-      
-      
+          flutter build appbundle --no-pub       
+      - name: Build iOS app
+        if: ${{ matrix.os == 'macos-11' }}
+        run: |
+          flutter pub get
+          echo "Building iOS..."
+          echo "Not implemented yet."
+  
+      - name: 'Upload Builds'
+        uses: actions/upload-artifact@v2
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        with:
+          name: builds
+          path: |
+            build/app/outputs/flutter-apk/app-release.apk
+            build/app/outputs/bundle/release/app-release.aab
+          retention-days: 5
